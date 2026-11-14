@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0a1722">
+  <meta name="description" content="打擊或投球，由你決定。手機點擊或按空白鍵，在 Night Slugger 挑戰九球棒球對決。">
+  <title>NIGHT SLUGGER 夜間強打者｜打擊與投球挑戰</title>
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body data-mode="bat">
+  <div class="page-glow" aria-hidden="true"></div>
+  <div class="shell">
+    <header class="site-header">
+      <a class="brand" href="./" aria-label="Night Slugger 首頁">
+        <span class="brand-symbol" aria-hidden="true">N<span>✦</span></span>
+        <span>NIGHT<span class="brand-light">SLUGGER</span><small>夜 間 強 打 者</small></span>
+      </a>
+      <div class="header-actions">
+        <span class="edition">ARCADE SERIES <b>01</b></span>
+        <button class="icon-button" id="soundButton" type="button" aria-label="開啟音效" aria-pressed="false" title="音效開關">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5Z"/><path class="sound-wave" d="M15 8a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14"/><path class="sound-muted" d="m16 9 5 6m0-6-5 6"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <section class="intro" aria-labelledby="page-title">
+      <div>
+        <p class="eyebrow"><span></span> THE NIGHT IS YOURS.</p>
+        <h1 id="page-title">今晚，<span>揮出完美一擊。</span></h1>
+        <p class="intro-copy" id="introCopy">九顆球，一次成名的機會。走進打擊區，讓球飛越夜空。</p>
+      </div>
+      <div class="hero-stamp" aria-hidden="true"><span>9</span><div>球決勝<br><b>MAKE IT COUNT.</b></div></div>
+    </section>
+
+    <div class="mode-switch" role="group" aria-label="遊戲模式">
+      <button class="mode-button" id="batMode" type="button" data-mode="bat" aria-pressed="true"><strong>打擊模式</strong><small>BATTER</small></button>
+      <button class="mode-button" id="pitchMode" type="button" data-mode="pitch" aria-pressed="false"><strong>投球模式</strong><small>PITCHER</small></button>
+    </div>
+
+    <main class="main-layout">
+      <section class="game-card" aria-label="棒球打擊遊戲">
+        <div class="scoreboard">
+          <div class="score-cell score-main"><span>本局得分 <small>SCORE</small></span><strong id="score">0000</strong></div>
+          <div class="score-cell"><span>投球 <small>PITCH</small></span><strong><b id="pitchNumber">0</b><em>/ 9</em></strong></div>
+          <div class="score-cell"><span id="statLabel">全壘打 <small>HR</small></span><strong id="homeRuns">0</strong></div>
+          <div class="score-cell"><span>最高分 <small>BEST</small></span><strong class="best-value" id="bestScore">0000</strong></div>
+        </div>
+
+        <div class="pitch-picker" id="pitchPicker" hidden>
+          <div class="pitch-picker-label"><strong>選擇球種</strong><small id="pitchDescription">球速最快，軌跡直接。</small></div>
+          <div class="pitch-options" role="group" aria-label="選擇球種">
+            <button class="pitch-option" type="button" data-pitch="fastball" aria-pressed="true"><strong>直球</strong><small>150 km/h</small></button>
+            <button class="pitch-option" type="button" data-pitch="slider" aria-pressed="false"><strong>滑球</strong><small>136 km/h</small></button>
+            <button class="pitch-option" type="button" data-pitch="changeup" aria-pressed="false"><strong>變速球</strong><small>118 km/h</small></button>
+          </div>
+        </div>
+
+        <div class="stadium" id="stadium" tabindex="-1">
+          <canvas id="field" width="1000" height="620" aria-label="夜間棒球場：球飛向本壘亮圈時揮棒"></canvas>
+          <div class="field-topline" aria-hidden="true"><span><i></i> LIVE FROM MOONLIGHT PARK</span><span>23°C · NIGHT GAME</span></div>
+          <div class="pitch-label" id="pitchLabel" hidden><span id="pitchType">直球</span><strong id="pitchSpeed">132</strong><small>km/h</small></div>
+          <div class="field-callout" id="fieldCallout" aria-hidden="true" hidden><strong id="calloutEnglish"></strong><span id="calloutDetail"></span></div>
+          <div class="field-caption" id="fieldCaption" aria-hidden="true">鎖定進壘時機，準備揮棒</div>
+
+          <div class="game-overlay" id="startOverlay">
+            <div class="overlay-content">
+              <div class="baseball-emblem" aria-hidden="true">⚾</div>
+              <p class="eyebrow" id="startKicker">STEP UP TO THE PLATE</p>
+              <h2 id="startTitle">輪到你上場。</h2>
+              <p id="startDescription">當球接近本壘亮圈<br>點一下，揮出你的全壘打。</p>
+              <button class="primary-button" id="startButton" type="button">開始挑戰 <span aria-hidden="true">↗</span></button>
+              <small id="startHint">手機點擊 · 電腦按空白鍵</small>
+            </div>
+          </div>
+
+          <div class="game-overlay result-overlay" id="endOverlay" hidden>
+            <div class="overlay-content">
+              <p class="eyebrow">THE FINAL SCORE</p>
+              <h2 id="endTitle">漂亮的一局。</h2>
+              <strong class="final-score" id="finalScore">0</strong>
+              <p id="endSummary">全壘打 0 支 · 安打 0 支</p>
+              <span class="new-best" id="newBest" hidden>✦ 刷新個人最佳紀錄</span>
+              <button class="primary-button" id="playAgain" type="button">再打一局 <span aria-hidden="true">↻</span></button>
+            </div>
+          </div>
+
+          <div class="game-overlay pause-overlay" id="pauseOverlay" role="dialog" aria-modal="true" aria-labelledby="pauseTitle" hidden>
+            <div class="overlay-content"><p class="eyebrow">TIME OUT</p><h2 id="pauseTitle">休息一下。</h2><p>比賽已暫停，回來後繼續抓準時機。</p><button class="primary-button" id="resumeButton" type="button">繼續比賽 <span aria-hidden="true">▶</span></button></div>
+          </div>
+        </div>
+
+        <div class="game-console">
+          <div class="timing-panel">
+            <div class="timing-label"><span><i class="status-dot"></i><b id="statusText">等待開賽</b></span><small id="timingHint">進入綠區，立即揮棒</small></div>
+            <div class="timing-track" id="timingTrack" role="img" aria-label="揮棒時機：白色指標進入綠色區域時揮棒">
+              <span class="timing-zone contact-zone"></span><span class="timing-zone great-zone"></span><span class="timing-zone perfect-zone"></span>
+              <span class="timing-marker" id="timingMarker"></span>
+              <span class="timing-target" aria-hidden="true"></span>
+            </div>
+            <div class="timing-scale" aria-hidden="true"><span>太早</span><span>PERFECT</span><span>太晚</span></div>
+          </div>
+          <button class="swing-button" id="swingButton" type="button" disabled><svg viewBox="0 0 32 32" aria-hidden="true"><path d="m8 25 4-4m-1 1 11-16c2-3 7 2 4 4L11 24m-4-1 3 3m-5 0 2 2"/></svg><span><span id="actionLabel">揮棒</span><small id="actionKey">SWING / SPACE</small></span><b aria-hidden="true">↗</b></button>
+        </div>
+
+        <div class="round-footer">
+          <div class="pitch-history" id="pitchHistory" aria-label="本局九球的擊球紀錄"></div>
+          <button class="restart-button" id="restartButton" type="button"><span aria-hidden="true">↻</span> 重新開始</button>
+        </div>
+      </section>
+
+      <aside class="sidebar">
+        <section class="info-card rules-card" aria-labelledby="rules-title">
+          <div class="card-kicker"><span>THE PLAYBOOK</span><span aria-hidden="true">↗</span></div>
+          <h2 id="rules-title">上場前，先看這裡。</h2>
+          <ol class="rules-list" id="rulesList">
+            <li><span>01</span><div><strong>盯緊來球</strong><p>每局 9 球，投手會隨機切換球速，觀察球和下方節奏條。</p></div></li>
+            <li><span>02</span><div><strong>抓準一瞬間</strong><p>白色指標進入綠區時，點球場、揮棒按鈕或按空白鍵。</p></div></li>
+            <li><span>03</span><div><strong>把球送上看台</strong><p>越接近中心，擊球越遠。每球只能揮一次，9 球後結算得分。</p></div></li>
+          </ol>
+          <div class="scoring-guide" id="scoringGuide"><div><span class="legend perfect"></span><span>全壘打</span><strong>+500</strong></div><div><span class="legend great"></span><span>漂亮安打</span><strong>+200</strong></div><div><span class="legend contact"></span><span>擦棒安打</span><strong>+100</strong></div><div><span class="legend miss"></span><span>揮空 / 未揮</span><strong>+0</strong></div></div>
+        </section>
+        <section class="tip-card"><span class="tip-icon" aria-hidden="true">✧</span><div><span>COACH'S TIP</span><p id="coachTip">別急著揮棒。<br>等球來找你。</p><small>節奏比手速更重要。</small></div><span class="tip-number" aria-hidden="true">09</span></section>
+        <p class="privacy-note">兩種模式的最高分分開儲存於此瀏覽器。切換模式會重設當局。</p>
+      </aside>
+    </main>
+    <footer class="site-footer"><span>NIGHT SLUGGER © 2026</span><span>一點節奏，一記好球。 <span aria-hidden="true">✦</span></span></footer>
+  </div>
+  <p class="sr-only" id="announcer" role="status" aria-live="polite" aria-atomic="true"></p>
+  <noscript><div class="noscript">請開啟瀏覽器的 JavaScript 以遊玩打擊挑戰。</div></noscript>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
