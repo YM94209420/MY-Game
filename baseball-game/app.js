@@ -1,4 +1,4 @@
-import { TOTAL_PITCHES, CONTACT_PROGRESS, RESULTS, PITCH_TYPES, PITCH_CHARGE_MS, choosePitch, judgeSwing, judgePitch, newRound, newPitchingRound, recordResult, recordPitchResult } from './engine.js';
+import { TOTAL_PITCHES, CONTACT_PROGRESS, RESULTS, PITCH_TYPES, PITCH_CHARGE_MS, choosePitch, judgeSwing, judgePitch, newRound, newPitchingRound, recordResult, recordPitchResult } from './engine.js?v=1.2.0';
 
 const $ = (id) => document.getElementById(id);
 const canvas = $('field');
@@ -615,3 +615,5 @@ renderScore();
 resize();
 new ResizeObserver(resize).observe($('stadium'));
 requestAnimationFrame(tick);
+if (new URLSearchParams(window.location.search).get('mode') === 'pitch') selectMode('pitch');
+$('loadState').hidden = true;

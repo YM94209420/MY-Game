@@ -4,10 +4,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#0a1722">
+  <meta name="app-version" content="1.2.0">
   <meta name="description" content="打擊或投球，由你決定。手機點擊或按空白鍵，在 Night Slugger 挑戰九球棒球對決。">
   <title>NIGHT SLUGGER 夜間強打者｜打擊與投球挑戰</title>
   <link rel="icon" type="image/svg+xml" href="./favicon.svg">
-  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./styles.css?v=1.2.0">
 </head>
 <body data-mode="bat">
   <div class="page-glow" aria-hidden="true"></div>
@@ -19,6 +20,7 @@
       </a>
       <div class="header-actions">
         <span class="edition">ARCADE SERIES <b>01</b></span>
+        <a class="release-link" href="./updates.html"><span>更新紀錄 ↗</span><small>v1.2.0</small></a>
         <button class="icon-button" id="soundButton" type="button" aria-label="開啟音效" aria-pressed="false" title="音效開關">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5Z"/><path class="sound-wave" d="M15 8a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14"/><path class="sound-muted" d="m16 9 5 6m0-6-5 6"/></svg>
         </button>
@@ -34,10 +36,11 @@
       <div class="hero-stamp" aria-hidden="true"><span>9</span><div>球決勝<br><b>MAKE IT COUNT.</b></div></div>
     </section>
 
-    <div class="mode-switch" role="group" aria-label="遊戲模式">
+    <div class="mode-switch" id="gameModes" role="group" aria-label="遊戲模式">
       <button class="mode-button" id="batMode" type="button" data-mode="bat" aria-pressed="true"><strong>打擊模式</strong><small>BATTER</small></button>
       <button class="mode-button" id="pitchMode" type="button" data-mode="pitch" aria-pressed="false"><strong>投球模式</strong><small>PITCHER</small></button>
     </div>
+    <p class="load-state" id="loadState" role="status">遊戲載入中。若此訊息持續顯示，請確認新版檔案已全部上傳，再重新整理。</p>
 
     <main class="main-layout">
       <section class="game-card" aria-label="棒球打擊遊戲">
@@ -125,10 +128,10 @@
         <p class="privacy-note">兩種模式的最高分分開儲存於此瀏覽器。切換模式會重設當局。</p>
       </aside>
     </main>
-    <footer class="site-footer"><span>NIGHT SLUGGER © 2026</span><span>一點節奏，一記好球。 <span aria-hidden="true">✦</span></span></footer>
+    <footer class="site-footer"><a href="./updates.html">NIGHT SLUGGER © 2026 · v1.2.0 · 更新紀錄</a><span>一點節奏，一記好球。 <span aria-hidden="true">✦</span></span></footer>
   </div>
   <p class="sr-only" id="announcer" role="status" aria-live="polite" aria-atomic="true"></p>
   <noscript><div class="noscript">請開啟瀏覽器的 JavaScript 以遊玩打擊挑戰。</div></noscript>
-  <script type="module" src="./app.js"></script>
+  <script type="module" src="./app.js?v=1.2.0"></script>
 </body>
 </html>

@@ -8,6 +8,10 @@
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important}.game-overlay{backdrop-filter:none}}
 
 /* Dual-mode controls: batting keeps the mint identity; pitching uses orange. */
+.release-link{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-height:44px;padding:6px 12px;border:1px solid #40534d;border-radius:8px;font-size:10px;white-space:nowrap;color:var(--text);background:#c1ef7508}
+.release-link:hover{border-color:var(--mint);background:#c1ef7514}.release-link small{font-size:8px;letter-spacing:.08em;color:var(--mint)}
+.load-state{margin:0 0 18px;padding:12px 15px;color:var(--gold);font-size:11px;line-height:1.8;border:1px solid #eed78b40;border-radius:8px;background:#eed78b08}
+@media(max-width:520px){.header-actions{gap:10px}.release-link{font-size:9px;padding:5px 8px}.release-link small{font-size:7px}.site-footer{gap:12px;flex-wrap:wrap;line-height:1.8}}
 body{--mode-accent:var(--mint);--mode-accent-soft:#c1ef7518;--mode-accent-line:#c1ef754d;--mode-ink:#193127}
 body[data-mode="pitch"]{--mode-accent:var(--orange);--mode-accent-soft:#ff865d18;--mode-accent-line:#ff865d52;--mode-ink:#3b1d14}
 
