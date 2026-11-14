@@ -24,7 +24,7 @@ jobs:
 
       - uses: actions/upload-pages-artifact@v4
         with:
-          path: baseball-game/site
+          path: baseball-game
 
       - uses: actions/deploy-pages@v4
         id: deployment
